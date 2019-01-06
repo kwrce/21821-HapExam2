@@ -19,16 +19,16 @@
 
 
 
-    $(document).ready(function(){
-        var headerId = '${RequestParameters.shipDocId!0}';
-        if (headerId!=0) {
+   $(document).ready(function(){
+        var shipDocId = '${RequestParameters.shipDocId!0}';
+        if (shipDocId!=0) {
             viewModel.model.set("shipDocId", '${RequestParameters.shipDocId!0}');
             $("#grid").data('kendoGrid').dataSource.page(1);
             getShipedInfo( viewModel.model.get("shipDocId"));
-        }else if (headerId == 0) {
-            viewModel.model.set("shipDocId", '${RequestParameters.shipDocId!0}');
+        }else if (shipDocId == 0) {
+           /* viewModel.model.set("shipDocId", '${RequestParameters.shipDocId!0}');
             getShipedInfo( viewModel.model.get("shipDocId"));
-            $("#grid").data('kendoGrid').dataSource.page(1);
+            $("#grid").data('kendoGrid').dataSource.page(1);*/
 
         }
 
