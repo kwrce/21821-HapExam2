@@ -30,6 +30,7 @@ public class Bill {
     public static final String FIELD_LOT_NUMBER = "lotNumber";
     public static final String FIELD_ISSUE_REQ_QTY = "issueReqQty";
     public static final String FIELD_SHIPPED_NUMBER = "shippedNumber";
+    public static final String FIELD_LINE_NUM = "lineNum";
 
 
     @Id
@@ -39,6 +40,8 @@ public class Bill {
     private Date shippedTime; //发货时间
 
     private Long shipDocId; //表ID
+
+    private Long lineNum; //行号
 
     @NotEmpty
     @Length(max = 50)
@@ -75,6 +78,22 @@ public class Bill {
     private Long confirmerId; //确认人用户ID
 
     private Long itemId; //表ID，主键，供其他表做外键
+
+    public Long getShipDocId() {
+        return shipDocId;
+    }
+
+    public void setShipDocId(Long shipDocId) {
+        this.shipDocId = shipDocId;
+    }
+
+    public Long getLineNum() {
+        return lineNum;
+    }
+
+    public void setLineNum(Long lineNum) {
+        this.lineNum = lineNum;
+    }
 
     @NotEmpty
     @Length(max = 60)

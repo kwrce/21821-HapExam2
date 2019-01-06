@@ -12,8 +12,6 @@
         <result column="LINE_QTY" property="lineQty" jdbcType="DECIMAL" />
         <result column="LOT_NUMBER" property="lotNumber" jdbcType="VARCHAR" />
         <result column="ISSUED_FLAG" property="issuedFlag" jdbcType="VARCHAR" />
-        <result column="PROGRAM_APPLICATION_ID" property="programApplicationId" jdbcType="DECIMAL" />
-        <result column="PROGRAM_UPDATE_DATE" property="programUpdateDate" jdbcType="DATE" />
     </resultMap>
 
 
