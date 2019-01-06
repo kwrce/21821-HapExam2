@@ -6,13 +6,11 @@
         <result column="SHIP_LINE_ID" property="shipLineId" jdbcType="DECIMAL" />
         <result column="SHIP_DOC_ID" property="shipDocId" jdbcType="DECIMAL" />
         <result column="LINE_NUM" property="lineNum" jdbcType="DECIMAL" />
-        <result column="INVENTORY_ITEM_ID" property="inventoryItemId" jdbcType="DECIMAL" />
         <result column="ORGANIZATION_ID" property="organizationId" jdbcType="DECIMAL" />
         <result column="ISSUE_REQ_QTY" property="issueReqQty" jdbcType="DECIMAL" />
         <result column="LINE_QTY" property="lineQty" jdbcType="DECIMAL" />
         <result column="LOT_NUMBER" property="lotNumber" jdbcType="VARCHAR" />
         <result column="ISSUED_FLAG" property="issuedFlag" jdbcType="VARCHAR" />
-
         <result column="DOC_NUMBER" property="docNumber" jdbcType="VARCHAR" />
         <result column="TO_ORGANIZATION_ID" property="toOrganizationId" jdbcType="DECIMAL" />
         <result column="SHIPPED_TIME" property="shippedTime" jdbcType="DATE" />
@@ -21,7 +19,7 @@
         <result column="CONFIRMER_ID" property="confirmerId" jdbcType="DECIMAL" />
         <result column="DRIVER_NAME" property="driverName" jdbcType="VARCHAR" />
         <result column="DRIVER_PHONE" property="driverPhone" jdbcType="VARCHAR" />
-        <result column="plate_number" property="plateNumber" jdbcType="VARCHAR" />
+        <result column="PLATE_NUMBER" property="plateNumber" jdbcType="VARCHAR" />
         <result column="FREIGHT" property="freight" jdbcType="DECIMAL" />
         <result column="MEMO" property="memo" jdbcType="VARCHAR" />
         <result column="ITEM_ID" property="itemId" jdbcType="DECIMAL" />

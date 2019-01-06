@@ -1,5 +1,6 @@
 package com.hand.exam.bills.dto;
 
+import com.hand.hap.system.dto.BaseDTO;
 import com.sun.istack.NotNull;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -8,7 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Date;
 
-public class Bill {
+public class Bill extends BaseDTO {
     public static final String FIELD_SHIP_LINE_ID = "shipLineId";
     public static final String FIELD_SHIP_DOC_ID = "shipDocId";
     public static final String FIELD_SHIPPED_TIME = "shippedTime";
