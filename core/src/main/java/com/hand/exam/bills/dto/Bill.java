@@ -34,10 +34,16 @@ public class Bill extends BaseDTO {
     public static final String FIELD_LINE_NUM = "lineNum";
     public static final String FIELD_INVENTORY_ITEM_ID = "inventoryItemId";
     public static final String FIELD_LINE_QTY = "lineQty";
+    public static final String FIELD_ISSUED_FLAG = "issuedFlag";
 
     @Id
     @GeneratedValue
     private Long shipLineId; //表ID
+
+    @Length(max = 10)
+    private String issuedFlag; //行发货标志
+
+
 
     @NotNull
     private Long inventoryItemId; //物料
@@ -103,8 +109,47 @@ public class Bill extends BaseDTO {
 
     private Double shippedNumber;  //已发货数量
 
+    @Override
+    public String toString() {
+        return "Bill{" +
+                "shipLineId=" + shipLineId +
+                ", issuedFlag='" + issuedFlag + '\'' +
+                ", inventoryItemId=" + inventoryItemId +
+                ", shippedTime=" + shippedTime +
+                ", shipDocId=" + shipDocId +
+                ", lineNum=" + lineNum +
+                ", docType='" + docType + '\'' +
+                ", organizationId=" + organizationId +
+                ", shippmentStatus='" + shippmentStatus + '\'' +
+                ", driverName='" + driverName + '\'' +
+                ", driverPhone='" + driverPhone + '\'' +
+                ", plateNumber='" + plateNumber + '\'' +
+                ", freight=" + freight +
+                ", memo='" + memo + '\'' +
+                ", docNumber='" + docNumber + '\'' +
+                ", toOrganizationId=" + toOrganizationId +
+                ", confirmerId=" + confirmerId +
+                ", itemId=" + itemId +
+                ", itemNumber='" + itemNumber + '\'' +
+                ", lotControl='" + lotControl + '\'' +
+                ", description='" + description + '\'' +
+                ", lotNumber='" + lotNumber + '\'' +
+                ", lineQty=" + lineQty +
+                ", issueReqQty=" + issueReqQty +
+                ", shippedNumber=" + shippedNumber +
+                '}';
+    }
+
     public Long getShipLineId() {
         return shipLineId;
+    }
+
+    public String getIssuedFlag() {
+        return issuedFlag;
+    }
+
+    public void setIssuedFlag(String issuedFlag) {
+        this.issuedFlag = issuedFlag;
     }
 
     public void setShipLineId(Long shipLineId) {
@@ -294,4 +339,5 @@ public class Bill extends BaseDTO {
     public void setShippedNumber(Double shippedNumber) {
         this.shippedNumber = shippedNumber;
     }
+
 }

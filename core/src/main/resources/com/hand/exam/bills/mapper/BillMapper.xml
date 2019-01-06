@@ -2,7 +2,7 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hand.exam.bills.mapper.BillMapper">
-    <resultMap id="BaseResultMap" type="com.hand.exam.bills.mapper.BillMapper">
+    <resultMap id="BaseResultMap" type="com.hand.exam.bills.dto.Bill">
         <result column="SHIP_LINE_ID" property="shipLineId" jdbcType="DECIMAL" />
         <result column="SHIP_DOC_ID" property="shipDocId" jdbcType="DECIMAL" />
         <result column="LINE_NUM" property="lineNum" jdbcType="DECIMAL" />
@@ -29,6 +29,47 @@
         <result column="LOT_CONTROL" property="lotControl" jdbcType="VARCHAR" />
         <result column="SHIPPED_NUMBER" property="shippedNumber" jdbcType="VARCHAR" />
     </resultMap>
-
+    <select id="selectByBill" parameterType="com.hand.exam.bills.dto.Bill" resultMap="BaseResultMap">
+        SELECT ship.SHIP_LINE_ID,
+        ship.SHIP_DOC_ID,
+        ship.LINE_NUM,
+        org.ORGANIZATION_ID,
+        ship.ISSUE_REQ_QTY,
+        ship.LINE_QTY,
+        ship.LOT_NUMBER,
+        ship.ISSUED_FLAG,
+        doc.DOC_NUMBER,
+        doc.TO_ORGANIZATION_ID,
+        doc.SHIPPED_TIME,
+        doc.DOC_TYPE,
+        doc.SHIPPMENT_STATUS,
+        doc.CONFIRMER_ID,
+        doc.DRIVER_NAME,
+        doc.DRIVER_PHONE,
+        doc.plate_number,
+        doc.FREIGHT,
+        doc.MEMO,
+        item.ITEM_ID,
+        item.INVENTORY_ITEM_ID,
+        item.ITEM_NUMBER,
+        item.DESCRIPTION,
+        item.LOT_CONTROL,
+        ship.LINE_QTY-ship.ISSUE_REQ_QTY SHIPPED_NUMBER
+        FROM xxfnd_organization_access_b org,
+        xxfnd_organization_access_b tog,
+        xxinv_material_item item,
+        xxinv_shiped_doc doc,
+        xxinv_shiped_doc_lines ship
+        <where>
+            ship.SHIP_DOC_ID=doc.SHIP_DOC_ID
+            AND doc.TO_ORGANIZATION_ID=org.ORGANIZATION_ID
+            AND doc.ORGANIZATION_ID=tog.ORGANIZATION_ID
+            AND ship.INVENTORY_ITEM_ID=item.INVENTORY_ITEM_ID
+            <if test="shipDocId != null">
+                and ship.SHIP_DOC_ID = #{shipDocId,jdbcType=DECIMAL}
+            </if>
+        </where>
+        order by ship.SHIP_LINE_ID
+    </select>
 
 </mapper>

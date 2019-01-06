@@ -24,6 +24,7 @@ public class BillController extends BaseController{
     @Autowired
     private IBillService billService;
 
+
     @RequestMapping("/bill/query")
     @ResponseBody
     public ResponseData selectList(HttpServletRequest request, Bill condition,
@@ -32,6 +33,8 @@ public class BillController extends BaseController{
         IRequest iRequest = createRequestContext(request);
         List<Bill> datas = billService.selectByBill(iRequest, condition, page,
                 pagesize);
+        for (Bill bill : datas)
+            System.out.println(bill);
         return new ResponseData(datas);
     }
 
