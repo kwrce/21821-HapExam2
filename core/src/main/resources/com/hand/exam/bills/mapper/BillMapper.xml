@@ -2,7 +2,7 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hand.exam.bills.mapper.BillMapper">
-    <resultMap id="BaseResultMap" type="com.hand.exam.bills.mapper.BillMapper">
+    <resultMap id="BaseResultMap" type="com.hand.exam.bills.dto.Bill">
         <result column="SHIP_LINE_ID" property="shipLineId" jdbcType="DECIMAL" />
         <result column="SHIP_DOC_ID" property="shipDocId" jdbcType="DECIMAL" />
         <result column="LINE_NUM" property="lineNum" jdbcType="DECIMAL" />
