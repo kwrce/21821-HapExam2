@@ -6,4 +6,5 @@ import com.hand.exam.bills.dto.ShipedDoc;
 
 public interface IShipedDocService extends IBaseService<ShipedDoc>, ProxySelf<IShipedDocService>{
 
+
 }
