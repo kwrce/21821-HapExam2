@@ -109,6 +109,37 @@ public class Bill extends BaseDTO {
 
     private Double shippedNumber;  //已发货数量
 
+    @Override
+    public String toString() {
+        return "Bill{" +
+                "shipLineId=" + shipLineId +
+                ", issuedFlag='" + issuedFlag + '\'' +
+                ", inventoryItemId=" + inventoryItemId +
+                ", shippedTime=" + shippedTime +
+                ", shipDocId=" + shipDocId +
+                ", lineNum=" + lineNum +
+                ", docType='" + docType + '\'' +
+                ", organizationId=" + organizationId +
+                ", shippmentStatus='" + shippmentStatus + '\'' +
+                ", driverName='" + driverName + '\'' +
+                ", driverPhone='" + driverPhone + '\'' +
+                ", plateNumber='" + plateNumber + '\'' +
+                ", freight=" + freight +
+                ", memo='" + memo + '\'' +
+                ", docNumber='" + docNumber + '\'' +
+                ", toOrganizationId=" + toOrganizationId +
+                ", confirmerId=" + confirmerId +
+                ", itemId=" + itemId +
+                ", itemNumber='" + itemNumber + '\'' +
+                ", lotControl='" + lotControl + '\'' +
+                ", description='" + description + '\'' +
+                ", lotNumber='" + lotNumber + '\'' +
+                ", lineQty=" + lineQty +
+                ", issueReqQty=" + issueReqQty +
+                ", shippedNumber=" + shippedNumber +
+                '}';
+    }
+
     public Long getShipLineId() {
         return shipLineId;
     }
@@ -308,4 +339,5 @@ public class Bill extends BaseDTO {
     public void setShippedNumber(Double shippedNumber) {
         this.shippedNumber = shippedNumber;
     }
+
 }

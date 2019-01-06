@@ -32,6 +32,8 @@ public class BillController extends BaseController{
         IRequest iRequest = createRequestContext(request);
         List<Bill> datas = billService.selectByBill(iRequest, condition, page,
                 pagesize);
+        for (Bill bill : datas)
+            System.out.println(bill);
         return new ResponseData(datas);
     }
 
