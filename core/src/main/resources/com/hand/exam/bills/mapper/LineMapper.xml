@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hand.exam.bills.mapper.LineMapper">
+    <resultMap id="BaseResultMap" type="com.hand.exam.bills.dto.Line">
+        <result column="SHIP_LINE_ID" property="shipLineId" jdbcType="DECIMAL" />
+        <result column="SHIP_DOC_ID" property="shipDocId" jdbcType="DECIMAL" />
+        <result column="LINE_NUM" property="lineNum" jdbcType="DECIMAL" />
+        <result column="INVENTORY_ITEM_ID" property="inventoryItemId" jdbcType="DECIMAL" />
+        <result column="ORGANIZATION_ID" property="organizationId" jdbcType="DECIMAL" />
+        <result column="ISSUE_REQ_QTY" property="issueReqQty" jdbcType="DECIMAL" />
+        <result column="LINE_QTY" property="lineQty" jdbcType="DECIMAL" />
+        <result column="LOT_NUMBER" property="lotNumber" jdbcType="VARCHAR" />
+        <result column="ISSUED_FLAG" property="issuedFlag" jdbcType="VARCHAR" />
+        <result column="PROGRAM_APPLICATION_ID" property="programApplicationId" jdbcType="DECIMAL" />
+        <result column="PROGRAM_UPDATE_DATE" property="programUpdateDate" jdbcType="DATE" />
+    </resultMap>
+
+
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hand.exam.bills.mapper.ItemMapper">
+    <resultMap id="BaseResultMap" type="com.hand.exam.bills.dto.Item">
+        <result column="ITEM_ID" property="itemId" jdbcType="DECIMAL" />
+        <result column="INVENTORY_ITEM_ID" property="inventoryItemId" jdbcType="DECIMAL" />
+        <result column="ITEM_NUMBER" property="itemNumber" jdbcType="VARCHAR" />
+        <result column="ORGANIZATION_ID" property="organizationId" jdbcType="DECIMAL" />
+        <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+        <result column="LOT_CONTROL" property="lotControl" jdbcType="VARCHAR" />
+        <result column="UOM_CODE" property="uomCode" jdbcType="VARCHAR" />
+        <result column="ITEM_STATUS" property="itemStatus" jdbcType="VARCHAR" />
+        <result column="PROGRAM_APPLICATION_ID" property="programApplicationId" jdbcType="DECIMAL" />
+        <result column="PROGRAM_UPDATE_DATE" property="programUpdateDate" jdbcType="DATE" />
+    </resultMap>
+
+    <select id="selectLOV" parameterType="com.hand.exam.customer.dto.Customer" resultMap="BaseResultMap">
+        SELECT
+        ITEM_ID,
+        INVENTORY_ITEM_ID,
+        ITEM_NUMBER
+        FROM
+        xxinv_material_item
+        <where>
+            <if test="inventoryItemId != null">
+                and  INVENTORY_ITEM_ID like %#{inventoryItemId,jdbcType=DECIMAL}%
+            </if>
+            <if test="customerName != null">
+                and  ITEM_NUMBER like %#{itemNumber,jdbcType=DECIMAL}%
+            </if>
+        </where>
+        ORDER BY ITEM_ID asc
+    </select>
+
+</mapper>
