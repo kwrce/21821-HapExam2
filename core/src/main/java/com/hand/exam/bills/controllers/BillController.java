@@ -24,6 +24,7 @@ public class BillController extends BaseController{
     @Autowired
     private IBillService billService;
 
+
     @RequestMapping("/bill/query")
     @ResponseBody
     public ResponseData selectList(HttpServletRequest request, Bill condition,
