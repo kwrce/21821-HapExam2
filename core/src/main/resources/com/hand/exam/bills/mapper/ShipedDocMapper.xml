@@ -20,7 +20,7 @@
         <result column="PROGRAM_UPDATE_DATE" property="programUpdateDate" jdbcType="DATE" />
     </resultMap>
 
-    <select id="selectLovShipedDoc" resultMap="BaseResultMap">
+    <select id="selectLovShipedDoc" parameterType="com.hand.exam.bills.dto.ShipedDoc" resultMap="BaseResultMap">
         SELECT
         SHIP_DOC_ID,
         ORGANIZATION_ID,
@@ -41,10 +41,10 @@
         xxinv_shiped_doc
         WHERE 1=1
         <if test="shipDocId!=null and !''.equals(shipDocId) ">
-            AND SHIP_DOC_ID=#{shipDocId}
+            AND SHIP_DOC_ID like %#{shipDocId}%
         </if>
-        <if test="DOC_NUMBER!=null and !''.equals(docNumber) ">
-            AND DOC_NUMBER=#{docNumber}
+        <if test="docNumber!=null and !''.equals(docNumber) ">
+            AND DOC_NUMBER like %#{docNumber}%
         </if>
     </select>
 
