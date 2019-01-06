@@ -1,15 +1,14 @@
 package com.hand.exam.bills.dto;
 
-import com.hand.hap.system.dto.BaseDTO;
+import com.sun.istack.NotNull;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-public class bills extends BaseDTO {
+public class Bill {
     public static final String FIELD_SHIP_LINE_ID = "shipLineId";
     public static final String FIELD_SHIPPED_TIME = "shippedTime";
     public static final String FIELD_DOC_TYPE = "docType";
@@ -23,7 +22,12 @@ public class bills extends BaseDTO {
     public static final String FIELD_TO_ORGANIZATION_ID = "toOrganizationId";
     public static final String FIELD_CONFIRMER_ID = "confirmerId";
     public static final String FIELD_PLATE_NUMBER = "plateNumber";
-
+    public static final String FIELD_ITEM_ID = "itemId";
+    public static final String FIELD_ITEM_NUMBER = "itemNumber";
+    public static final String FIELD_LOT_CONTROL = "lotControl";
+    public static final String FIELD_DESCRIPTION = "description";
+    public static final String FIELD_LOT_NUMBER = "lotNumber";
+    public static final String FIELD_ISSUE_REQ_QTY = "issueReqQty";
 
 
     @Id
@@ -65,6 +69,91 @@ public class bills extends BaseDTO {
     private Long toOrganizationId; //目标仓库
 
     private Long confirmerId; //确认人用户ID
+
+    private Long itemId; //表ID，主键，供其他表做外键
+
+    @NotEmpty
+    @Length(max = 60)
+    private String itemNumber; //物料编码
+
+    @Length(max = 10)
+    private String lotControl; //是否批次控制
+
+    @Length(max = 240)
+    private String description; //物料说明
+
+    @Length(max = 100)
+    private String lotNumber; //批次
+
+    private Double lineQty; //行数量
+
+    private Double issueReqQty; //待发货数量
+
+    private Double shippedNumber;  //已发货数量
+
+    public Long getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(Long itemId) {
+        this.itemId = itemId;
+    }
+
+    public String getItemNumber() {
+        return itemNumber;
+    }
+
+    public void setItemNumber(String itemNumber) {
+        this.itemNumber = itemNumber;
+    }
+
+    public String getLotControl() {
+        return lotControl;
+    }
+
+    public void setLotControl(String lotControl) {
+        this.lotControl = lotControl;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getLotNumber() {
+        return lotNumber;
+    }
+
+    public void setLotNumber(String lotNumber) {
+        this.lotNumber = lotNumber;
+    }
+
+    public Double getLineQty() {
+        return lineQty;
+    }
+
+    public void setLineQty(Double lineQty) {
+        this.lineQty = lineQty;
+    }
+
+    public Double getIssueReqQty() {
+        return issueReqQty;
+    }
+
+    public void setIssueReqQty(Double issueReqQty) {
+        this.issueReqQty = issueReqQty;
+    }
+
+    public Double getShippedNumber() {
+        return shippedNumber;
+    }
+
+    public void setShippedNumber(Double shippedNumber) {
+        this.shippedNumber = shippedNumber;
+    }
 
     public Long getShipLineId() {
         return shipLineId;
