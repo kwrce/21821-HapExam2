@@ -110,17 +110,17 @@
         <div class="row">
             <div class="col-sm-3">
                 &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<!--k-valid-custom--> <!--k-state-invalid k-invalid-->
-                <label class=" control-label" style="font-size: 15px;">单号:</label>
+                <label class=" control-label" style="font-size: 15px;"><@spring.message "bill.docnumber"/>:</label>
                 <input id="docNumber" class="k-textbox "  required type="text" data-role="maskedtextbox" data-bind="value:model.docNumber ">
             </div>
             <div class="col-sm-3 ">
                 &nbsp;&nbsp;&nbsp;
-                <label class=" control-label" style="font-size: 15px;">发货时间:</label>
+                <label class=" control-label" style="font-size: 15px;"><@spring.message "bill.shippedtime"/>:</label>
                 <input type="text" id="shippedTime"type="date" data-role="datepicker" class="k-datepicker k-textbox "  required data-bind="value:model.shippedTime">
             </div>
             <div class="col-sm-3">
                 &nbsp;&nbsp;&nbsp;
-                <label class=" control-label" style="font-size: 15px;">单据类型:</label>
+                <label class=" control-label" style="font-size: 15px;"><@spring.message "bill.doctype"/>:</label>
                 <input type="text" id="docType" data-role="combobox" data-value-primitive="true"
                        data-text-field="meaning" data-value-field="value" data-bind="source:docType,value:model.docType" >
             </div>
@@ -130,7 +130,7 @@
         <div class="row">
             <div class="col-sm-3">
                 &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-                <label class=" control-label" style="font-size: 15px;">仓库:</label>
+                <label class=" control-label" style="font-size: 15px;"><@spring.message "bill.organization"/>:</label>
                 <input type="text" id="organizationId" class="k-textbox "  required data-bind="value:model.organizationId,text:model.organizationName">
                 <script>
                     $("#organizationId").kendoLov(${lovProvider.getLov(base.contextPath, base.locale,
@@ -139,7 +139,7 @@
             </div>
             <div class="col-sm-3">
                 &nbsp;&nbsp;&nbsp;
-                <label class=" control-label" style="font-size: 15px;">接收仓库:</label>
+                <label class=" control-label" style="font-size: 15px;"><@spring.message "bill.toorganization"/>:</label>
                 <input type="text" id="toOrganizationId" class="k-textbox "  required data-bind="value:model.toOrganizationId,text:model.toOrganizationName">
                 <script>
                     $("#toOrganizationId").kendoLov(${lovProvider.getLov(base.contextPath, base.locale,
@@ -147,7 +147,7 @@
                 </script>
             </div>
             <div class="col-sm-3">
-                <label class=" control-label" style="font-size: 15px;">发货单状态:</label>
+                <label class=" control-label" style="font-size: 15px;"><@spring.message "bill.shippmentstatus"/>:</label>
 
                 <select id="shippmentStatus" data-role="combobox" data-value-primitive="true"
                         data-text-field="meaning" data-value-field="value"
@@ -158,17 +158,17 @@
         <div class="row">
             <div class="col-sm-3">
 
-                <label class=" control-label" style="font-size: 15px;">司机姓名:</label>
+                <label class=" control-label" style="font-size: 15px;"><@spring.message "bill.driverphone"/>:</label>
                 <input id="driverName"  type="text" data-role="maskedtextbox" data-bind="value:model.driverName ">
             </div>
             <div class="col-sm-3">
                 &nbsp;&nbsp;&nbsp;
-                <label class=" control-label" style="font-size: 15px;">司机电话:</label>
+                <label class=" control-label" style="font-size: 15px;"><@spring.message "bill.drivername"/>:</label>
                 <input id="drivePhone"  type="text" data-role="maskedtextbox" data-bind="value:model.drivePhone ">
             </div>
             <div class="col-sm-3">
                 &nbsp;&nbsp;&nbsp;
-                <label class=" control-label" style="font-size: 15px;">车牌号码:</label>
+                <label class=" control-label" style="font-size: 15px;"><@spring.message "bill.platenumber"/>:</label>
 
                 <input id="plateNumber"  type="text" data-role="maskedtextbox" data-bind="value:model.plateNumber ">
             </div>
@@ -177,17 +177,17 @@
         <div class="row">
             <div class="col-sm-3">
                 &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-                <label class=" control-label" style="font-size: 15px;">运费:</label>
+                <label class=" control-label" style="font-size: 15px;"><@spring.message "bill.freight"/>:</label>
                 <input id="freight"  type="text" data-role="maskedtextbox" data-bind="value:model.freight ">
             </div>
             <div class="col-sm-3">
                 &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-                <label class=" control-label" style="font-size: 15px;">备注:</label>
+                <label class=" control-label" style="font-size: 15px;"><@spring.message "bill.memo"/>:</label>
                 <input id="memo"  type="text" data-role="maskedtextbox" data-bind="value:model.memo ">
             </div>
             <div class="col-sm-3">
                 &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-                <label class=" control-label" style="font-size: 15px;">创建人:</label>
+                <label class=" control-label" style="font-size: 15px;"><@spring.message "bill.creatman"/>:</label>
                 <input id="confirmerName"  type="text" data-role="maskedtextbox" data-bind="value:model.confirmerName ">
             </div>
         </div>
@@ -218,14 +218,14 @@
             <div class="pull-left" id="buttom" style="padding-bottom:10px;">
                     <span id="print" class="btn btn-info k-grid-add glyphicon "
                           style="float:left;margin-right:5px;" data-bind="click:exportExcel" >
-        打印</span>
+        <@spring.message "bill.print"/></span>
 
                 <span  id="confirmShipment" class="btn btn-info k-grid-save-changes "
                        style="float:left;margin-right:5px;" data-bind="click:save">
-            确认发货</span>
+            <@spring.message "bill.confirmshipment"/></span>
 
                 <span id="shipPrint" class="btn btn-info "data-bind="click:remove" style="float:left;">
-            单据确认</span>
+            <@spring.message "bill.documentconfirmation"/></span>
             </div>
             <script>kendo.bind($('#buttom'), viewModel);</script>
         </div>
@@ -299,12 +299,12 @@
 
             {
                 field: "lineNum",
-                title: '<@spring.message "line.linenum"/>',
+                title: '<@spring.message "bill.linenum"/>',
                 width: 120
             },
             {
                 field: "itemNumber",
-                title: '<@spring.message "line.issuereqqty"/>',
+                title: '<@spring.message "bill.itemnumber"/>',
                 width: 120,
                 editor:function (container,options) {
                     $('<input name=' + options.field + '/>')
@@ -320,32 +320,32 @@
             },
             {
                 field: "lotControl",
-                title: '<@spring.message "line.issuereqqty"/>',
+                title: '<@spring.message "bill.lotcontrol"/>',
                 width: 120
             },
             {
                 field: "description",
-                title: '<@spring.message "line.issuereqqty"/>',
+                title: '<@spring.message "bill.description"/>',
                 width: 120
             },
             {
                 field: "lotNumber",
-                title: '<@spring.message "line.lotnumber"/>',
+                title: '<@spring.message "bill.lotnumber"/>',
                 width: 120
             },
             {
                 field: "lineQty",
-                title: '<@spring.message "line.lineqty"/>',
+                title: '<@spring.message "bill.lineqty"/>',
                 width: 120
             },
             {
                 field: "issueReqQty",
-                title: '<@spring.message "line.issuereqqty"/>',
+                title: '<@spring.message "bill.issuereqqty"/>',
                 width: 120
             },
             {
                 field: "shippedNumber",
-                title: '<@spring.message "line.issuereqqty"/>',
+                title: '<@spring.message "bill.shippednumber"/>',
                 width: 120
             },
             {
