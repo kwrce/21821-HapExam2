@@ -28,6 +28,7 @@ public class Bill {
     public static final String FIELD_DESCRIPTION = "description";
     public static final String FIELD_LOT_NUMBER = "lotNumber";
     public static final String FIELD_ISSUE_REQ_QTY = "issueReqQty";
+    public static final String FIELD_SHIPPED_NUMBER = "shippedNumber";
 
 
     @Id
