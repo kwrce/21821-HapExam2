@@ -1,53 +1,22 @@
 <#include "../include/header.html">
+<script src="${base.contextPath}/common/code?docType=XXFND_DOC_TYPE" type="text/javascript"></script>
+<script src="${base.contextPath}/common/code?shippmentStatus=XXFND_SHIPPMENT_STATUS
+" type="text/javascript"></script>
 <style>
     .hidden{
         display: none;
     }
 </style>
 <script type="text/javascript">
-    var viewModel = Hap.createGridViewModel("#grid");
-    var viewModel = kendo.observable($.extend({
-        model: {},
-        create: function () {
-            $("#grid").data('kendoGrid').addRow();
-        },
-        save: function () {
-            $("#grid").data('kendoGrid').saveChanges();
-            location.href = "order_lines.html?headerId="+viewModel.model.get("headerId");
-        },
-        query: function (e) {
-            $("#grid").data('kendoGrid').dataSource.page(1);
-        },
-        refresh: function(){
-            $("#grid").data('kendoGrid').dataSource.read();
-        },
-        remove: function () {
-            Hap.deleteGridSelection({
-                grid: $("#grid")
-            });
-
-        },
-        reset: function(){
-            var formData = this.model.toJSON();
-            for (var k in formData) {
-                this.model.set(k, null);
-            }
-        },
-        cancel:function(){
-            $("#grid").data('kendoGrid').cancelChanges();
-        },
-        exportExcel:function () {
-            $("#grid").data('kendoGrid').saveAsExcel();
-        },
-        exportPDF:function(){
-            $("#grid").data('kendoGrid').saveAsPDF();
-        }
-    }, {
+    var viewModel = Hap.createGridViewModel("#grid",{
         requeteMethodData: [
             {mean: "GET", value: "GET"},
             {mean: "POST", value: "POST"}],
-        /* orderStatus: orderStatus*/
-    }));
+        docType: docType,
+        shippmentStatus: shippmentStatus
+
+    });
+
 
 
     $(document).ready(function(){
@@ -65,7 +34,7 @@
 
 
     });
-    getOrderHeaderInfo = function (shipDocId) {
+    getShipedInfo = function (shipDocId) {
         if (shipDocId!=0) {
             $.ajax({
                 url: '${base.contextPath}/hap/om/order/headers/query?headerId=${RequestParameters.shipDocId!0}',
@@ -75,7 +44,7 @@
                     var a0 = args.rows[0] || {};
                     var shippmentStatus
                     for (var k in a0) {
-                        viewModel.model.set(k, a0[k]);
+                        viewModel2.model.set(k, a0[k]);
                         if(k=="shippmentStatus"){
                             console.log(k)
                             shippmentStatus = a0[k];
@@ -101,7 +70,53 @@
     var shippmentStatus = viewModel.model.get("shippmentStatus");
 
 
-
+    var viewModel2 = kendo.observable({
+        model: {},
+        save: function(e){
+            var data= viewModel2.model.toJSON();
+            /*if(isEdit){
+                data.__status = "update";
+            }else{
+                data.__status = "add";
+            }*/
+            var validator = $("#query-form").kendoValidator({
+                rules: {
+                    mappingUrlRuleCheck: function(input) {
+                        if (input.is("[id=shippedTime]")) {
+                           /* if (viewModel.model.mappingUrl.indexOf("/")!=-1){
+                                return false;
+                            }*/
+                           console.log(viewModel2.model.shippedTime)
+                        }
+                        return true;
+                    },
+                },
+                messages: {
+                    mappingUrlRuleCheck: "发布地址不能出现 /",
+                },
+                invalidMessageType : "tooltip"
+            }).data("kendoValidator");
+            if (validator.validate()) {
+                console.log(kendo.stringify([data]))
+                $.ajax({
+                    type   : 'POST',
+                    url    : '${base.contextPath}/staff/submit',
+                    dataType : "json",
+                    contentType : "application/json",
+                    data   : kendo.stringify([data]),
+                    success: function (data) {
+                        console.log(data)
+                        if(data.success==false){
+                            kendo.ui.showErrorDialog({
+                                message:data.message
+                            });
+                        }else{
+                            window.parent.$("#dialog").data("kendoWindow").close();
+                        }
+                    }
+                });
+            }}});
+    kendo.bind($('#query-form'), viewModel2);
 </script>
 <body>
 <div id="page-content">
@@ -147,6 +162,7 @@
                 </script>
             </div>
             <div class="col-sm-3">
+                &nbsp;&nbsp;&nbsp;
                 <label class=" control-label" style="font-size: 15px;"><@spring.message "bill.shippmentstatus"/>:</label>
 
                 <select id="shippmentStatus" data-role="combobox" data-value-primitive="true"
@@ -209,6 +225,7 @@
             <@spring.message "hap.delete"/></span>
         </div>
         <script>kendo.bind($('#toolbar-btn'), viewModel);</script>
+        <script>kendo.bind($('#toolbar-btn'), viewModel2);</script>
     </div>
     <div style="clear:both">
         <div id="grid">
