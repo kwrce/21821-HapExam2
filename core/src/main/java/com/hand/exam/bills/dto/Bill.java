@@ -10,6 +10,7 @@ import java.util.Date;
 
 public class Bill {
     public static final String FIELD_SHIP_LINE_ID = "shipLineId";
+    public static final String FIELD_SHIP_DOC_ID = "shipDocId";
     public static final String FIELD_SHIPPED_TIME = "shippedTime";
     public static final String FIELD_DOC_TYPE = "docType";
     public static final String FIELD_ORGANIZATION_ID = "organizationId";
@@ -36,6 +37,8 @@ public class Bill {
     private Long shipLineId; //表ID
 
     private Date shippedTime; //发货时间
+
+    private Long shipDocId; //表ID
 
     @NotEmpty
     @Length(max = 50)
