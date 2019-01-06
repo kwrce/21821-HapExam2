@@ -31,11 +31,15 @@ public class Bill {
     public static final String FIELD_ISSUE_REQ_QTY = "issueReqQty";
     public static final String FIELD_SHIPPED_NUMBER = "shippedNumber";
     public static final String FIELD_LINE_NUM = "lineNum";
-
+    public static final String FIELD_INVENTORY_ITEM_ID = "inventoryItemId";
+    public static final String FIELD_LINE_QTY = "lineQty";
 
     @Id
     @GeneratedValue
     private Long shipLineId; //表ID
+
+    @NotNull
+    private Long inventoryItemId; //物料
 
     private Date shippedTime; //发货时间
 
@@ -79,22 +83,6 @@ public class Bill {
 
     private Long itemId; //表ID，主键，供其他表做外键
 
-    public Long getShipDocId() {
-        return shipDocId;
-    }
-
-    public void setShipDocId(Long shipDocId) {
-        this.shipDocId = shipDocId;
-    }
-
-    public Long getLineNum() {
-        return lineNum;
-    }
-
-    public void setLineNum(Long lineNum) {
-        this.lineNum = lineNum;
-    }
-
     @NotEmpty
     @Length(max = 60)
     private String itemNumber; //物料编码
@@ -114,70 +102,6 @@ public class Bill {
 
     private Double shippedNumber;  //已发货数量
 
-    public Long getItemId() {
-        return itemId;
-    }
-
-    public void setItemId(Long itemId) {
-        this.itemId = itemId;
-    }
-
-    public String getItemNumber() {
-        return itemNumber;
-    }
-
-    public void setItemNumber(String itemNumber) {
-        this.itemNumber = itemNumber;
-    }
-
-    public String getLotControl() {
-        return lotControl;
-    }
-
-    public void setLotControl(String lotControl) {
-        this.lotControl = lotControl;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getLotNumber() {
-        return lotNumber;
-    }
-
-    public void setLotNumber(String lotNumber) {
-        this.lotNumber = lotNumber;
-    }
-
-    public Double getLineQty() {
-        return lineQty;
-    }
-
-    public void setLineQty(Double lineQty) {
-        this.lineQty = lineQty;
-    }
-
-    public Double getIssueReqQty() {
-        return issueReqQty;
-    }
-
-    public void setIssueReqQty(Double issueReqQty) {
-        this.issueReqQty = issueReqQty;
-    }
-
-    public Double getShippedNumber() {
-        return shippedNumber;
-    }
-
-    public void setShippedNumber(Double shippedNumber) {
-        this.shippedNumber = shippedNumber;
-    }
-
     public Long getShipLineId() {
         return shipLineId;
     }
@@ -186,12 +110,36 @@ public class Bill {
         this.shipLineId = shipLineId;
     }
 
+    public Long getInventoryItemId() {
+        return inventoryItemId;
+    }
+
+    public void setInventoryItemId(Long inventoryItemId) {
+        this.inventoryItemId = inventoryItemId;
+    }
+
     public Date getShippedTime() {
         return shippedTime;
     }
 
     public void setShippedTime(Date shippedTime) {
         this.shippedTime = shippedTime;
+    }
+
+    public Long getShipDocId() {
+        return shipDocId;
+    }
+
+    public void setShipDocId(Long shipDocId) {
+        this.shipDocId = shipDocId;
+    }
+
+    public Long getLineNum() {
+        return lineNum;
+    }
+
+    public void setLineNum(Long lineNum) {
+        this.lineNum = lineNum;
     }
 
     public String getDocType() {
@@ -280,5 +228,69 @@ public class Bill {
 
     public void setConfirmerId(Long confirmerId) {
         this.confirmerId = confirmerId;
+    }
+
+    public Long getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(Long itemId) {
+        this.itemId = itemId;
+    }
+
+    public String getItemNumber() {
+        return itemNumber;
+    }
+
+    public void setItemNumber(String itemNumber) {
+        this.itemNumber = itemNumber;
+    }
+
+    public String getLotControl() {
+        return lotControl;
+    }
+
+    public void setLotControl(String lotControl) {
+        this.lotControl = lotControl;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getLotNumber() {
+        return lotNumber;
+    }
+
+    public void setLotNumber(String lotNumber) {
+        this.lotNumber = lotNumber;
+    }
+
+    public Double getLineQty() {
+        return lineQty;
+    }
+
+    public void setLineQty(Double lineQty) {
+        this.lineQty = lineQty;
+    }
+
+    public Double getIssueReqQty() {
+        return issueReqQty;
+    }
+
+    public void setIssueReqQty(Double issueReqQty) {
+        this.issueReqQty = issueReqQty;
+    }
+
+    public Double getShippedNumber() {
+        return shippedNumber;
+    }
+
+    public void setShippedNumber(Double shippedNumber) {
+        this.shippedNumber = shippedNumber;
     }
 }

@@ -12,6 +12,24 @@
         <result column="LINE_QTY" property="lineQty" jdbcType="DECIMAL" />
         <result column="LOT_NUMBER" property="lotNumber" jdbcType="VARCHAR" />
         <result column="ISSUED_FLAG" property="issuedFlag" jdbcType="VARCHAR" />
+
+        <result column="DOC_NUMBER" property="docNumber" jdbcType="VARCHAR" />
+        <result column="TO_ORGANIZATION_ID" property="toOrganizationId" jdbcType="DECIMAL" />
+        <result column="SHIPPED_TIME" property="shippedTime" jdbcType="DATE" />
+        <result column="DOC_TYPE" property="docType" jdbcType="VARCHAR" />
+        <result column="SHIPPMENT_STATUS" property="shippmentStatus" jdbcType="VARCHAR" />
+        <result column="CONFIRMER_ID" property="confirmerId" jdbcType="DECIMAL" />
+        <result column="DRIVER_NAME" property="driverName" jdbcType="VARCHAR" />
+        <result column="DRIVER_PHONE" property="driverPhone" jdbcType="VARCHAR" />
+        <result column="plate_number" property="plateNumber" jdbcType="VARCHAR" />
+        <result column="FREIGHT" property="freight" jdbcType="DECIMAL" />
+        <result column="MEMO" property="memo" jdbcType="VARCHAR" />
+        <result column="ITEM_ID" property="itemId" jdbcType="DECIMAL" />
+        <result column="INVENTORY_ITEM_ID" property="inventoryItemId" jdbcType="DECIMAL" />
+        <result column="ITEM_NUMBER" property="itemNumber" jdbcType="VARCHAR" />
+        <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+        <result column="LOT_CONTROL" property="lotControl" jdbcType="VARCHAR" />
+        <result column="SHIPPED_NUMBER" property="shippedNumber" jdbcType="VARCHAR" />
     </resultMap>
 
 
