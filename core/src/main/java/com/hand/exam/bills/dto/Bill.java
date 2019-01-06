@@ -34,10 +34,16 @@ public class Bill extends BaseDTO {
     public static final String FIELD_LINE_NUM = "lineNum";
     public static final String FIELD_INVENTORY_ITEM_ID = "inventoryItemId";
     public static final String FIELD_LINE_QTY = "lineQty";
+    public static final String FIELD_ISSUED_FLAG = "issuedFlag";
 
     @Id
     @GeneratedValue
     private Long shipLineId; //表ID
+
+    @Length(max = 10)
+    private String issuedFlag; //行发货标志
+
+
 
     @NotNull
     private Long inventoryItemId; //物料
@@ -105,6 +111,14 @@ public class Bill extends BaseDTO {
 
     public Long getShipLineId() {
         return shipLineId;
+    }
+
+    public String getIssuedFlag() {
+        return issuedFlag;
+    }
+
+    public void setIssuedFlag(String issuedFlag) {
+        this.issuedFlag = issuedFlag;
     }
 
     public void setShipLineId(Long shipLineId) {
