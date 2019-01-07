@@ -73,7 +73,8 @@
     var viewModel2 = kendo.observable({
         model: {},
         save: function(e){
-            var data= viewModel2.model.toJSON();
+            var data= viewModel.model.toJSON();
+            console.log(data)
             /*if(isEdit){
                 data.__status = "update";
             }else{
@@ -81,18 +82,32 @@
             }*/
             var validator = $("#query-form").kendoValidator({
                 rules: {
-                    mappingUrlRuleCheck: function(input) {
+                    shippedTimeRuleCheck: function(input) {
                         if (input.is("[id=shippedTime]")) {
-                           /* if (viewModel.model.mappingUrl.indexOf("/")!=-1){
-                                return false;
-                            }*/
-                           console.log(viewModel2.model.shippedTime)
+                           var time1 = new Date().getTime();
+                           var time2 = viewModel.model.get("shippedTime").getTime();
+                           console.log("是否大于当前时间"+time2 > time1)
+                            return time2 > time1;
                         }
                         return true;
                     },
+                    docNumberRuleCheck: function(input) {
+                        if (input.is("[id=docNumber]")) {
+                            var date = new Date();
+                            var type = getdataNmber()
+                            console.log(type)
+                            var docNumber = viewModel.model.get("docNumber");
+                            docNumber.startsWith(type);
+                            console.log("docNumber.startsWith(type)" + docNumber.startsWith(type))
+                            console.log("是否大于当前时间"+time2 > time1)
+                            return time2 > time1;
+                        }
+                        return true;
+                    }
                 },
                 messages: {
-                    mappingUrlRuleCheck: "发布地址不能出现 /",
+                    shippedTimeRuleCheck: "发货时间必须大于当前时间",
+                    docNumberRuleCheck: "编号规则为D+yyyyMMdd+(1-1000随机数)，y为年M为月d为日",
                 },
                 invalidMessageType : "tooltip"
             }).data("kendoValidator");
@@ -117,6 +132,18 @@
                 });
             }}});
     kendo.bind($('#query-form'), viewModel2);
+    getdataNmber = function () {
+        var now = new Date();
+        var yy = now.getFullYear();
+        var mm = now.getMonth() + 1;
+        var dd = now.getDate();
+        var clock = "D" + yy;
+        if(mm < 10) clock += "0";
+        clock += mm ;
+        if(dd < 10) clock += "0";
+        clock += dd ;
+        return clock;
+    }
 </script>
 <body>
 <div id="page-content">
@@ -225,7 +252,7 @@
             <@spring.message "hap.delete"/></span>
         </div>
         <script>kendo.bind($('#toolbar-btn'), viewModel);</script>
-        <script>kendo.bind($('#toolbar-btn'), viewModel2);</script>
+        <script>kendo.bind($('#save'), viewModel2);</script>
     </div>
     <div style="clear:both">
         <div id="grid">
