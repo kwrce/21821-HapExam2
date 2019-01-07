@@ -36,6 +36,8 @@ public class Bill extends BaseDTO {
     public static final String FIELD_LINE_QTY = "lineQty";
     public static final String FIELD_ISSUED_FLAG = "issuedFlag";
     public static final String FIELD_DOC_SHIP_STATUS = "docShipStatus";
+    public static final String FIELD_DOC_RGANIZATION_NAME = "organizationName";
+    public static final String FIELD_DOC_ORGANIZATION_NUMBER = "organizationNumber";
     @Id
     @GeneratedValue
     private Long shipLineId; //表ID

@@ -30,6 +30,27 @@
         <result column="SHIPPED_NUMBER" property="shippedNumber" jdbcType="VARCHAR" />
         <result column="DOC_SHIP_STATUS" property="docShipStatus" jdbcType="VARCHAR" />
     </resultMap>
+    <!--更新订单-->
+    <update id="updateBillDoc" parameterType="com.hand.exam.bills.dto.Bill" >
+        update xxinv_shiped_doc
+        <set >
+            ORGANIZATION_ID =#{organizationId,jdbcType=DECIMAL},
+            DOC_NUMBER =#{docNumber,jdbcType=DECIMAL},
+            TO_ORGANIZATION_ID=#{toOrganizationId,jdbcType=DECIMAL},
+            SHIPPED_TIME=#{shippedTime,jdbcType=DECIMAL},
+            DOC_TYPE=#{docType,jdbcType=DECIMAL},
+            SHIPPMENT_STATUS=#{shippmentStatus,jdbcType=DECIMAL},
+            CONFIRMER_ID=#{confirmerId,jdbcType=DECIMAL},
+            DRIVER_NAME=#{driverName,jdbcType=DECIMAL},
+            DRIVER_PHONE=#{driverPhone,jdbcType=DECIMAL},
+            plate_number=#{plateNumber,jdbcType=DECIMAL},
+            FREIGHT=#{freight,jdbcType=DECIMAL}
+            <if test="memo != null">
+                ,MEMO=#{memo,jdbcType=DECIMAL}
+            </if>
+        </set>
+        where SHIP_DOC_ID = #{shipDocId,jdbcType=DECIMAL}
+    </update>
     <!--添加物料-->
     <insert id="insertBillLine" useGeneratedKeys="true" keyProperty="shipLineId" parameterType="com.hand.exam.bills.dto.Bill">
         INSERT INTO xxinv_shiped_doc_lines

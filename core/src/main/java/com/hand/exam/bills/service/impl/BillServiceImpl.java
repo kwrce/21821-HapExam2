@@ -46,7 +46,7 @@ public class BillServiceImpl extends BaseServiceImpl<Bill> implements IBillServi
                         break;
                     case DTOStatus.UPDATE:
                         billMapper.updateBillDoc(bill);
-                        billMapper.updateBillLine(bill);
+                        //billMapper.updateBillLine(bill);
                         break;
                     default:
                         break;

@@ -31,6 +31,7 @@ public class BillController extends BaseController{
                                    @RequestParam(defaultValue = DEFAULT_PAGE) int page,
                                    @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int pagesize) {
         IRequest iRequest = createRequestContext(request);
+
         List<Bill> datas = billService.selectByBill(iRequest, condition, page,
                 pagesize);
         for (Bill bill : datas)
@@ -42,7 +43,8 @@ public class BillController extends BaseController{
     @ResponseBody
     public ResponseData submit(HttpServletRequest request, @RequestBody
             List<Bill> bills) {
-
+        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        System.out.println("================="+bills);
         IRequest iRequest = createRequestContext(request);
         List<Bill> datas = billService.batchUpdate(iRequest, bills);
         return new ResponseData(datas);
