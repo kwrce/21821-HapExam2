@@ -36,7 +36,7 @@ public class Bill extends BaseDTO {
     public static final String FIELD_LINE_QTY = "lineQty";
     public static final String FIELD_ISSUED_FLAG = "issuedFlag";
     public static final String FIELD_DOC_SHIP_STATUS = "docShipStatus";
-    public static final String FIELD_DOC_RGANIZATION_NAME = "organizationName";
+    public static final String FIELD_DOC_ORGANIZATION_NAME = "organizationName";
     public static final String FIELD_DOC_ORGANIZATION_NUMBER = "organizationNumber";
     @Id
     @GeneratedValue
@@ -111,6 +111,14 @@ public class Bill extends BaseDTO {
 
     private Double shippedNumber;  //已发货数量
 
+    @NotEmpty
+    @Length(max = 60)
+    private String organizationNumber; //组织编码
+
+    @NotEmpty
+    @Length(max = 60)
+    private String organizationName; //组织名称
+
     @Override
     public String toString() {
         return "Bill{" +
@@ -140,6 +148,22 @@ public class Bill extends BaseDTO {
                 ", issueReqQty=" + issueReqQty +
                 ", shippedNumber=" + shippedNumber +
                 '}';
+    }
+
+    public String getOrganizationNumber() {
+        return organizationNumber;
+    }
+
+    public void setOrganizationNumber(String organizationNumber) {
+        this.organizationNumber = organizationNumber;
+    }
+
+    public String getOrganizationName() {
+        return organizationName;
+    }
+
+    public void setOrganizationName(String organizationName) {
+        this.organizationName = organizationName;
     }
 
     public String getDocShipStatus() {
