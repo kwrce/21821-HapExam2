@@ -31,11 +31,14 @@
         FROM
             xxinv_material_item
         WHERE 1=1
-        <if test="itemId!=null and !''.equals(itemId)">
-            AND ITEM_ID = #{itemId,jdbcType=DECIMAL}
+        <if test="inventoryItemId!=null and !''.equals(inventoryItemId)">
+            AND INVENTORY_ITEM_ID = #{inventoryItemId,jdbcType=DECIMAL}
         </if>
         <if test="itemNumber!=null and !''.equals(itemNumber)">
             AND ITEM_NUMBER like "%"#{itemNumber,jdbcType=VARCHAR}"%"
+        </if>
+        <if test="description!=null and !''.equals(description)">
+            AND DESCRIPTION like "%"#{itemNumber,jdbcType=VARCHAR}"%"
         </if>
     </select>
 </mapper>

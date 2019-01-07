@@ -41,7 +41,8 @@ public class BillServiceImpl extends BaseServiceImpl<Bill> implements IBillServi
                     case DTOStatus.ADD:
                         billMapper.insertBillDoc(bill);
                         System.out.println(bill.getShipDocId());
-                        billMapper.insertBillLine(bill);
+                        if(bill.getInventoryItemId()!=null)
+                            billMapper.insertBillLine(bill);
                         break;
                     case DTOStatus.UPDATE:
                         billMapper.updateBillDoc(bill);

@@ -26,9 +26,9 @@
             $("#grid").data('kendoGrid').dataSource.page(1);
             getShipedInfo( viewModel.model.get("shipDocId"));
         }else if (shipDocId == 0) {
-           /* viewModel.model.set("shipDocId", '${RequestParameters.shipDocId!0}');
+            viewModel.model.set("shipDocId", '${RequestParameters.shipDocId!0}');
             getShipedInfo( viewModel.model.get("shipDocId"));
-            $("#grid").data('kendoGrid').dataSource.page(1);*/
+            $("#grid").data('kendoGrid').dataSource.page(1);
 
         }
 
@@ -37,14 +37,15 @@
     getShipedInfo = function (shipDocId) {
         if (shipDocId!=0) {
             $.ajax({
-                url: '${base.contextPath}/hap/om/order/headers/query?headerId=${RequestParameters.shipDocId!0}',
+                url: '${base.contextPath}/bill/query?shipDocId=${RequestParameters.shipDocId!0}',
                 success: function (args) {
                     console.log(args)
                     console.log(args.rows.length)
                     var a0 = args.rows[0] || {};
                     var shippmentStatus
                     for (var k in a0) {
-                        viewModel2.model.set(k, a0[k]);
+                        viewModel.model.set(k, a0[k]);
+                        console.log(k + ":" + a0[k] )
                         if(k=="shippmentStatus"){
                             console.log(k)
                             shippmentStatus = a0[k];
@@ -61,7 +62,7 @@
     }
     authorityControl = function (shippmentStatus) {
         console.log(shippmentStatus)
-        if(shippmentStatus =="PENDING"){
+        if(shippmentStatus !="PENDING"){
             $("#create").css("display","none");
             $("#save").css("display","none");
             $("#remove").css("display","none");
@@ -69,7 +70,25 @@
     }
     var shippmentStatus = viewModel.model.get("shippmentStatus");
 
-
+    prepareSubmitParameter = function (options, type) {
+        var datas = options.models;
+        $.each(datas, function (i, r) {
+            if (type == 'create'){
+                r['__status'] = 'add';
+                r.shipDocId= viewModel.model.get("shipDocId");
+                r.organizationId= viewModel.model.get("organizationId");
+                console.log(viewModel.model.get("shipDocId"));
+                console.log(viewModel.model.get("organizationId"));
+                r.dirtyFields.shipDocId= "true";
+                r.dirtyFields.organizationId= "true";
+            }
+            else if (type == 'update')
+                r['__status'] = 'update';
+            else if (type == 'destroy')
+                r['__status'] = 'delete';
+        });
+        return datas;
+    };
     var viewModel2 = kendo.observable({
         model: {},
         save: function(e){
@@ -81,12 +100,14 @@
             }else{
                 data.__status = "add";
             }
+
             var validator = $("#query-form").kendoValidator({
                 rules: {
+
                     shippedTimeRuleCheck: function(input) {
                         if (input.is("[id=shippedTime]")) {
                            var time1 = new Date().getTime();
-                           var time2 = viewModel.model.get("shippedTime").getTime();
+                           var time2 = new Date(viewModel.model.get("shippedTime")).getTime();
                            console.log("是否大于当前时间"+time2 > time1)
                             return time2 > time1;
                         }
@@ -113,6 +134,7 @@
             }).data("kendoValidator");
             if (validator.validate()) {
                 console.log(kendo.stringify([data]))
+                viewModel.save();
                 $.ajax({
                     type   : 'POST',
                     url    : '${base.contextPath}/bill/submit',
@@ -202,12 +224,12 @@
             <div class="col-sm-3">
 
                 <label class=" control-label" style="font-size: 15px;"><@spring.message "bill.driverphone"/>:</label>
-                <input id="driverName"  type="text" data-role="maskedtextbox" data-bind="value:model.driverName ">
+                <input id="driverPhone"  type="text" data-role="maskedtextbox" data-bind="value:model.driverPhone ">
             </div>
             <div class="col-sm-3">
                 &nbsp;&nbsp;&nbsp;
                 <label class=" control-label" style="font-size: 15px;"><@spring.message "bill.drivername"/>:</label>
-                <input id="drivePhone"  type="text" data-role="maskedtextbox" data-bind="value:model.drivePhone ">
+                <input id="driverName"  type="text" data-role="maskedtextbox" data-bind="value:model.driverName ">
             </div>
             <div class="col-sm-3">
                 &nbsp;&nbsp;&nbsp;
@@ -303,7 +325,7 @@
             },
             parameterMap: function (options, type) {
                 if (type !== "read" && options.models) {
-                    var datas = Hap.prepareSubmitParameter(options, type)
+                    var datas = prepareSubmitParameter(options, type)
                     return kendo.stringify(datas);
                 } else if (type === "read") {
                     return Hap.prepareQueryParameter(viewModel.model.toJSON(), options)
@@ -357,7 +379,7 @@
                         model    : options.model,
                         select: function(e) {
                             options.model.set('lotControl', e.item.lotControl);
-                            options.model.set('itemId', e.item.itemId);
+                            options.model.set('inventoryItemId', e.item.inventoryItemId);
                             options.model.set('description', e.item.description);
                             options.model.set('itemNumber', e.item.itemNumber);
                         }
@@ -416,8 +438,8 @@
             },
 
             {
-                field: "itemId",
-                title: '<@spring.message "line.itemId"/>',
+                field: "inventoryItemId",
+                title: '<@spring.message "line.inventoryItemId"/>',
                 attributes: {style: "text-align:center",class:"hidden"},
                 width: 1,
                 headerAttributes: {
