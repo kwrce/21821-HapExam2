@@ -4,6 +4,9 @@
 </script>
 <body>
 <!--表单类型的快码-->
+<script src="${base.contextPath}/common/code?shippmentTypeData=XXFND_SHIPPMENT_STATUS" type="text/javascript"></script>
+<script src="${base.contextPath}/common/code?shippedCodeTypeData=XXFND_SHIPPED_CODE" type="text/javascript"></script>
+<script src="${base.contextPath}/common/code?docTypeData=XXFND_DOC_TYPE" type="text/javascript"></script>
 <div id="page-content">
     <form class="form-horizontal" id="myForm">
         <div class="panel-body" id="querySale">
@@ -30,11 +33,11 @@
                 <div class="col-sm-4">
                     <div class="form-group">
                         <!--发货状态选择的下拉框组件-->
-                        <label for="" class="col-sm-3 control-label"><@spring.message "bill.shippmentstatus"/></label>
+                        <label for="shippmentTypeCommomBox" class="col-sm-3 control-label"><@spring.message "bill.shippmentstatus"/></label>
                         <div class="col-sm-9">
-                            <select style="height: 25px; width: 150px" id="" data-value-primitive="true" data-bind="source:XXFND_DOC_TYPE,value: model.orderStatus">
-                            </select>
-                        </div>
+                            <select style="height: 25px; width: 150px" id="shippmentTypeCommomBox" data-value-primitive="true" data-bind="value: model.shippmentstatus">
+                        </select>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -51,18 +54,20 @@
                 </div>
                 <div class="col-sm-4">
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">是否未发货行</label>
+                        <!--是否存在未发货行选择的下拉框组件-->
+                        <label for="shippedCodeTypeCommomBox" class="col-sm-3 control-label"><@spring.message "bill.docshipstatus"/></label>
                         <div class="col-sm-9">
-                            <select style="height: 25px; width: 150px"id="orderStatus" data-value-primitive="true" data-bind="source:orderStatus,value: model.orderStatus">
+                            <select style="height: 25px; width: 150px"id="shippedCodeTypeCommomBox" data-value-primitive="true" data-bind="value: model.docshipstatus">
                             </select>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">单据类型：</label>
+                        <!--单据类型选择的下拉框组件-->
+                        <label for="docTypeCommomBox" class="col-sm-3 control-label"><@spring.message "bill.doctype"/></label>
                         <div class="col-sm-9">
-                            <select style="height: 25px; width: 150px"id="docType" data-value-primitive="true" data-bind="source:XXINV_SHIPED_DOC,value: model.orderStatus">
+                            <select style="height: 25px; width: 150px"id="docTypeCommomBox" data-value-primitive="true" data-bind="value: model.docType">
                             </select>
                         </div>
                     </div>
@@ -301,7 +306,33 @@
         // 初始化物料的LOV
         $("#itemNumberLov")
             .kendoLov(${lovProvider.getLov(base.contextPath, base.locale, "LOV_ITEMNUMBER")});
+
+        // 初始化发货状态的下拉框
+        $("#shippmentTypeCommomBox").kendoComboBox({
+            dataSource: shippmentTypeData,
+            valuePrimitive: true,
+            dataTextField: "meaning",
+            dataValueField: "value"
+        });
+
+        // 初始化是否存在发货行的下拉框
+        $("#shippedCodeTypeCommomBox").kendoComboBox({
+            dataSource: shippedCodeTypeData,
+            valuePrimitive: true,
+            dataTextField: "meaning",
+            dataValueField: "value"
+        });
+
+        // 初始化单据类型的下拉框
+        $("#docTypeCommomBox").kendoComboBox({
+            dataSource: docTypeData,
+            valuePrimitive: true,
+            dataTextField: "meaning",
+            dataValueField: "value"
+        });
+
     });
+
 
 </script>
 
