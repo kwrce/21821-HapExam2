@@ -58,7 +58,7 @@
         <trim prefix="(" suffix=")" suffixOverrides="," >
             ORGANIZATION_ID,
             DOC_NUMBER,
-            TO_ORGANIZATION_ID
+            TO_ORGANIZATION_ID,
             SHIPPED_TIME,
             DOC_TYPE,
             SHIPPMENT_STATUS,
@@ -67,7 +67,7 @@
             DRIVER_PHONE,
             plate_number,
             FREIGHT
-            <if test="momo != null">
+            <if test="memo != null">
                 ,MEMO
             </if>
         </trim>
@@ -75,7 +75,7 @@
             #{organizationId,jdbcType=DECIMAL},
             #{docNumber,jdbcType=VARCHAR},
             #{toOrganizationId,jdbcType=DECIMAL},
-            #{shippedTime,jdbcType=DATE},
+            #{shippedTime,jdbcType=TIMESTAMP},
             #{docType,jdbcType=VARCHAR},
             #{shippmentStatus,jdbcType=VARCHAR},
             #{confirmerId,jdbcType=DECIMAL},
@@ -83,8 +83,8 @@
             #{driverPhone,jdbcType=VARCHAR},
             #{plateNumber,jdbcType=VARCHAR},
             #{freight,jdbcType=DECIMAL}
-            <if test="momo != null" >
-                ,#{momo,jdbcType=VARCHAR}
+            <if test="memo != null" >
+                ,#{memo,jdbcType=VARCHAR}
             </if>
         </trim>
     </insert>
