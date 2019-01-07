@@ -9,6 +9,28 @@
         <result column="PROGRAM_APPLICATION_ID" property="programApplicationId" jdbcType="DECIMAL" />
         <result column="PROGRAM_UPDATE_DATE" property="programUpdateDate" jdbcType="DATE" />
     </resultMap>
+    <select id="selectOrganizationInfo" parameterType="java.util.Map" resultType="hashmap">
+        SELECT oa.ORGANIZATION_ID organizationId,
+        oa.ORGANIZATION_Name organizationName,
+        oa.ORGANIZATION_NUMBER organizationNumber
+        FROM xxfnd_organization_access_b oa
+        <where>
+            <if test="customerNumber != null">
+                and oa.ORGANIZATION_Name like concat('%',#{organizationName,jdbcType=VARCHAR},'%')
+            </if>
+        </where>
+    </select>
 
+    <select id="selectToOrganizationInfo" parameterType="java.util.Map" resultType="hashmap">
+        SELECT oa.ORGANIZATION_ID toOrganizationId,
+        oa.ORGANIZATION_Name toOrganizationName,
+        oa.ORGANIZATION_NUMBER toOrganizationNumber
+        FROM xxfnd_organization_access_b oa
+        <where>
+            <if test="customerNumber != null">
+                and oa.ORGANIZATION_Name like concat('%',#{organizationName,jdbcType=VARCHAR},'%')
+            </if>
+        </where>
+    </select>
 
 </mapper>

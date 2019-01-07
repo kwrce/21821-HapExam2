@@ -75,11 +75,12 @@
         save: function(e){
             var data= viewModel.model.toJSON();
             console.log(data)
-            /*if(isEdit){
+            var shipDocId = viewModel.model.set("shipDocId", '${RequestParameters.shipDocId!0}');
+            if(shipDocId!=0){
                 data.__status = "update";
             }else{
                 data.__status = "add";
-            }*/
+            }
             var validator = $("#query-form").kendoValidator({
                 rules: {
                     shippedTimeRuleCheck: function(input) {
@@ -175,7 +176,7 @@
                 <input type="text" id="organizationId" class="k-textbox "  required data-bind="value:model.organizationId,text:model.organizationName">
                 <script>
                     $("#organizationId").kendoLov(${lovProvider.getLov(base.contextPath, base.locale,
-                "LOV_ORDER_COMPANY")})
+                "XXINV_ISSUE_ORGAINZATION")})
                 </script>
             </div>
             <div class="col-sm-3">
@@ -184,7 +185,7 @@
                 <input type="text" id="toOrganizationId" class="k-textbox "  required data-bind="value:model.toOrganizationId,text:model.toOrganizationName">
                 <script>
                     $("#toOrganizationId").kendoLov(${lovProvider.getLov(base.contextPath, base.locale,
-                "LOV_ORDER_COMPANY")})
+                "XXINV_ISSUE_TOORGAINZATION")})
                 </script>
             </div>
             <div class="col-sm-3">
