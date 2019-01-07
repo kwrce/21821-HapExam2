@@ -8,7 +8,13 @@ import java.util.List;
 
 public interface BillMapper extends Mapper<Bill>{
     List<Bill> selectByBill(Bill bill);
-    int insertBill(Bill bill);
-    int updateBill(Bill bill);
-    int deleteBill(Bill bill);
+
+    int insertBillDoc(Bill bill);
+    int insertBillLine(Bill bill);
+
+    int updateBillDoc(Bill bill);
+    int updateBillLine(Bill bill);
+
+    int deleteBillDoc(Bill bill);
+    int deleteBillLine(Bill bill);
 }

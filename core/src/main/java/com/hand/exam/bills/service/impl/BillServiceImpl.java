@@ -24,7 +24,7 @@ public class BillServiceImpl extends BaseServiceImpl<Bill> implements IBillServi
     private BillMapper billMapper;
 
     @Override
-    @Transactional(propagation = Propagation.SUPPORTS, rollbackFor =
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor =
             Exception.class)
     public List<Bill> selectByBill(IRequest requestContext, Bill bill, int
             page, int pagesize) {
@@ -33,16 +33,19 @@ public class BillServiceImpl extends BaseServiceImpl<Bill> implements IBillServi
     }
 
     @Override
-    @Transactional(propagation = Propagation.SUPPORTS)
+    @Transactional(propagation = Propagation.REQUIRED)
     public List<Bill> batchUpdate(IRequest requestContext, List<Bill> bills){
         for (Bill bill : bills) {
             if (bill.get__status() != null) {
                 switch (bill.get__status()) {
                     case DTOStatus.ADD:
-                        billMapper.insertBill(bill);
+                        billMapper.insertBillDoc(bill);
+                        System.out.println(bill.getShipDocId());
+                        billMapper.insertBillLine(bill);
                         break;
                     case DTOStatus.UPDATE:
-                        billMapper.updateBill(bill);
+                        billMapper.updateBillDoc(bill);
+                        billMapper.updateBillLine(bill);
                         break;
                     default:
                         break;

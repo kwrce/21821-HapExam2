@@ -35,7 +35,7 @@ public class Bill extends BaseDTO {
     public static final String FIELD_INVENTORY_ITEM_ID = "inventoryItemId";
     public static final String FIELD_LINE_QTY = "lineQty";
     public static final String FIELD_ISSUED_FLAG = "issuedFlag";
-
+    public static final String FIELD_DOC_SHIP_STATUS = "docShipStatus";
     @Id
     @GeneratedValue
     private Long shipLineId; //表ID
@@ -43,7 +43,7 @@ public class Bill extends BaseDTO {
     @Length(max = 10)
     private String issuedFlag; //行发货标志
 
-
+    private String docShipStatus; //订单发货状态
 
     @NotNull
     private Long inventoryItemId; //物料
@@ -138,6 +138,14 @@ public class Bill extends BaseDTO {
                 ", issueReqQty=" + issueReqQty +
                 ", shippedNumber=" + shippedNumber +
                 '}';
+    }
+
+    public String getDocShipStatus() {
+        return docShipStatus;
+    }
+
+    public void setDocShipStatus(String docShipStatus) {
+        this.docShipStatus = docShipStatus;
     }
 
     public Long getShipLineId() {

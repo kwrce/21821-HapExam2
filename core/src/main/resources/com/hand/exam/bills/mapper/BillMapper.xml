@@ -28,16 +28,78 @@
         <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
         <result column="LOT_CONTROL" property="lotControl" jdbcType="VARCHAR" />
         <result column="SHIPPED_NUMBER" property="shippedNumber" jdbcType="VARCHAR" />
+        <result column="DOC_SHIP_STATUS" property="docShipStatus" jdbcType="VARCHAR" />
     </resultMap>
+    <!--添加物料-->
+    <insert id="insertBillLine" useGeneratedKeys="true" keyProperty="shipLineId" parameterType="com.hand.exam.bills.dto.Bill">
+        INSERT INTO xxinv_shiped_doc_lines
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            SHIP_DOC_ID,
+            LINE_NUM,
+            ISSUE_REQ_QTY,
+            LINE_QTY,
+            LOT_NUMBER,
+            ISSUED_FLAG,
+            INVENTORY_ITEM_ID
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            #{organizationId,jdbcType=DECIMAL},
+            #{lineNum,jdbcType=VARCHAR},
+            #{issueReqQty,jdbcType=DECIMAL},
+            #{lineQty,jdbcType=DECIMAL},
+            #{lotNumber,jdbcType=VARCHAR},
+            #{issuedFlag,jdbcType=VARCHAR},
+            #{inventoryItemId,jdbcType=DECIMAL}
+        </trim>
+    </insert>
+    <!--添加订单-->
+    <insert id="insertBillDoc" useGeneratedKeys="true" keyProperty="shipDocId" parameterType="com.hand.exam.bills.dto.Bill">
+        INSERT INTO xxinv_shiped_doc
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            ORGANIZATION_ID,
+            DOC_NUMBER,
+            TO_ORGANIZATION_ID
+            SHIPPED_TIME,
+            DOC_TYPE,
+            SHIPPMENT_STATUS,
+            CONFIRMER_ID,
+            DRIVER_NAME,
+            DRIVER_PHONE,
+            plate_number,
+            FREIGHT
+            <if test="momo != null">
+                ,MEMO
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            #{organizationId,jdbcType=DECIMAL},
+            #{docNumber,jdbcType=VARCHAR},
+            #{toOrganizationId,jdbcType=DECIMAL},
+            #{shippedTime,jdbcType=DATE},
+            #{docType,jdbcType=VARCHAR},
+            #{shippmentStatus,jdbcType=VARCHAR},
+            #{confirmerId,jdbcType=DECIMAL},
+            #{driverName,jdbcType=VARCHAR},
+            #{driverPhone,jdbcType=VARCHAR},
+            #{plateNumber,jdbcType=VARCHAR},
+            #{freight,jdbcType=DECIMAL}
+            <if test="momo != null" >
+                ,#{momo,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </insert>
+
     <select id="selectByBill" parameterType="com.hand.exam.bills.dto.Bill" resultMap="BaseResultMap">
-        SELECT ship.SHIP_LINE_ID,
+        SELECT
+        ship.SHIP_LINE_ID,
         ship.SHIP_DOC_ID,
         ship.LINE_NUM,
-        org.ORGANIZATION_ID,
         ship.ISSUE_REQ_QTY,
         ship.LINE_QTY,
         ship.LOT_NUMBER,
         ship.ISSUED_FLAG,
+        ship.INVENTORY_ITEM_ID,
+        doc.ORGANIZATION_ID,
         doc.DOC_NUMBER,
         doc.TO_ORGANIZATION_ID,
         doc.SHIPPED_TIME,
@@ -50,7 +112,6 @@
         doc.FREIGHT,
         doc.MEMO,
         item.ITEM_ID,
-        item.INVENTORY_ITEM_ID,
         item.ITEM_NUMBER,
         item.DESCRIPTION,
         item.LOT_CONTROL,
