@@ -16,7 +16,7 @@
     </resultMap>
 
 
-    <select id="selectLovMaterial" parameterType="com.hand.exam.bills.dto.Material" resultMap="BaseResultMap " >
+    <select id="selectLovMaterial" parameterType="com.hand.exam.bills.dto.Material" resultMap="BaseResultMap">
         SELECT
             ITEM_ID,
             INVENTORY_ITEM_ID,
