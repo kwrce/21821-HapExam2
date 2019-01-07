@@ -99,8 +99,7 @@
                             var docNumber = viewModel.model.get("docNumber");
                             docNumber.startsWith(type);
                             console.log("docNumber.startsWith(type)" + docNumber.startsWith(type))
-                            console.log("是否大于当前时间"+time2 > time1)
-                            return time2 > time1;
+                            return docNumber.startsWith(type);
                         }
                         return true;
                     }
@@ -131,7 +130,7 @@
                     }
                 });
             }}});
-    kendo.bind($('#query-form'), viewModel2);
+   /* kendo.bind($('#query-form'), viewModel2);*/
     getdataNmber = function () {
         var now = new Date();
         var yy = now.getFullYear();
@@ -353,11 +352,13 @@
                 editor:function (container,options) {
                     $('<input name=' + options.field + '/>')
                         .appendTo(container)
-                        .kendoLov($.extend(<@lov "LOV_ORDER_ITEM"/>, {
+                        .kendoLov($.extend(<@lov "LOV_ITEMNUMBER"/>, {
                         model    : options.model,
                         select: function(e) {
-                            options.model.set('itemNumber', e.item.itemNumber);
+                            options.model.set('lotControl', e.item.lotControl);
                             options.model.set('itemId', e.item.itemId);
+                            options.model.set('description', e.item.description);
+                            options.model.set('itemNumber', e.item.itemNumber);
                         }
                     }));
                 }
