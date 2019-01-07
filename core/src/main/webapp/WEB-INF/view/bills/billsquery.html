@@ -3,6 +3,7 @@
     var viewModel = Hap.createGridViewModel("#grid");
 </script>
 <body>
+<!--表单类型的快码-->
 <div id="page-content">
     <form class="form-horizontal" id="myForm">
         <div class="panel-body" id="querySale">
@@ -10,6 +11,7 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="form-group">
+                        <!--单号选择的Lov组件-->
                         <label for="docNumberLov" class="col-sm-3 control-label"><@spring.message "shipeddoc.docnumber"/></label>
                         <div class="col-sm-9">
                             <input type="text" style="width: 150px" id="docNumberLov"
@@ -27,13 +29,12 @@
                 </div>
                 <div class="col-sm-4">
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">单据状态：</label>
+                        <!--发货状态选择的下拉框组件-->
+                        <label for="" class="col-sm-3 control-label"><@spring.message "bill.shippmentstatus"/></label>
                         <div class="col-sm-9">
                             <select style="height: 25px; width: 150px" id="" data-value-primitive="true" data-bind="source:XXFND_DOC_TYPE,value: model.orderStatus">
                             </select>
                         </div>
-                        <script src="${base.contextPath}/common/code?statusObj=XXFND_DOC_TYPE"
-                                type="text/javascript"></script>
                     </div>
                 </div>
             </div>
@@ -41,16 +42,13 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">物料编码：</label>
+                        <!--物料编码选择的Lov组件-->
+                        <label for="itemNumberLov" class="col-sm-3 control-label"><@spring.message "material.itemNumber"/></label>
                         <div class="col-sm-9">
-                            <input type="text" style="width: 150px" id="inventoryItemId" data-bind="text:model.itemCode,value:model.inventoryItemId" class="k-textbox">
+                            <input type="text" style="width: 150px" id="itemNumberLov" data-bind="value:model.itemId" class="k-textbox">
                         </div>
                     </div>
                 </div>
-                <script>
-                    $("#inventoryItemId").kendoLov(${lovProvider.getLov(base.contextPath, base.locale,
-                        "LOV_InvInventoryItems")});
-                </script>
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label class="col-sm-3 control-label">是否未发货行</label>
@@ -58,8 +56,6 @@
                             <select style="height: 25px; width: 150px"id="orderStatus" data-value-primitive="true" data-bind="source:orderStatus,value: model.orderStatus">
                             </select>
                         </div>
-                        <script src="${base.contextPath}/common/code?statusObj=HAP_OM_ORDER_STATUS"
-                                type="text/javascript"></script>
                     </div>
                 </div>
                 <div class="col-sm-4">
@@ -69,8 +65,6 @@
                             <select style="height: 25px; width: 150px"id="docType" data-value-primitive="true" data-bind="source:XXINV_SHIPED_DOC,value: model.orderStatus">
                             </select>
                         </div>
-                        <script src="${base.contextPath}/common/code?statusObj=HAP_OM_ORDER_STATUS"
-                                type="text/javascript"></script>
                     </div>
                 </div>
             </div>
@@ -302,8 +296,11 @@
     $(document).ready(function () {
         // 初始化单号的LOV
         $("#docNumberLov")
-            .kendoLov($.extend(${lovProvider.getLov(base.contextPath, base.locale, "LOV_DOCNUMBER")}, {}));
+            .kendoLov(${lovProvider.getLov(base.contextPath, base.locale, "LOV_DOCNUMBER")});
 
+        // 初始化物料的LOV
+        $("#itemNumberLov")
+            .kendoLov(${lovProvider.getLov(base.contextPath, base.locale, "LOV_ITEMNUMBER")});
     });
 
 </script>

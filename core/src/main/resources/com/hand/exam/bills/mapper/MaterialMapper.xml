@@ -16,4 +16,26 @@
     </resultMap>
 
 
+    <select id="selectLovMaterial" parameterType="com.hand.exam.bills.dto.Material" resultMap="BaseResultMap " >
+        SELECT
+            ITEM_ID,
+            INVENTORY_ITEM_ID,
+            ITEM_NUMBER,
+            ORGANIZATION_ID,
+            DESCRIPTION,
+            LOT_CONTROL,
+            UOM_CODE,
+            ITEM_STATUS,
+            PROGRAM_APPLICATION_ID,
+            PROGRAM_UPDATE_DATE
+        FROM
+            xxinv_material_item
+        WHERE 1=1
+        <if test="itemId!=null and !''.equals(itemId)">
+            AND ITEM_ID = #{itemId,jdbcType=DECIMAL}
+        </if>
+        <if test="itemNumber!=null and !''.equals(itemNumber)">
+            AND ITEM_NUMBER like "%"#{itemNumber,jdbcType=VARCHAR}"%"
+        </if>
+    </select>
 </mapper>

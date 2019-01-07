@@ -41,10 +41,10 @@
         xxinv_shiped_doc
         WHERE 1=1
         <if test="shipDocId!=null and !''.equals(shipDocId) ">
-            AND SHIP_DOC_ID like %#{shipDocId}%
+            AND SHIP_DOC_ID = #{shipDocId,jdbcType=DECIMAL}
         </if>
         <if test="docNumber!=null and !''.equals(docNumber) ">
-            AND DOC_NUMBER like %#{docNumber}%
+            AND DOC_NUMBER like "%"#{docNumber,jdbcType=VARCHAR}"%"
         </if>
     </select>
 
