@@ -95,26 +95,26 @@
             var data= viewModel.model.toJSON();
             console.log(data)
             var shipDocId = viewModel.model.set("shipDocId", '${RequestParameters.shipDocId!0}');
-            if(shipDocId!=0){
+            if(shipDocId!=0||shipDocId!=null){
                 data.__status = "update";
             }else{
                 data.__status = "add";
             }
-
             var validator = $("#query-form").kendoValidator({
                 rules: {
-
                     shippedTimeRuleCheck: function(input) {
                         if (input.is("[id=shippedTime]")) {
-                           var time1 = new Date().getTime();
-                           var time2 = new Date(viewModel.model.get("shippedTime")).getTime();
-                           console.log("是否大于当前时间"+time2 > time1)
-                            return time2 > time1;
+                            if (data.__status=="add") {
+                                var time1 = new Date().getTime();
+                                var time2 = new Date(viewModel.model.get("shippedTime")).getTime();
+                                console.log("是否大于当前时间"+time2 > time1)
+                                return time2 > time1;
+                            }
                         }
                         return true;
                     },
                     docNumberRuleCheck: function(input) {
-                        if (input.is("[id=docNumber]")) {
+                        if (input.is("[id=docNumber]")&&data.__status=="add") {
                             var date = new Date();
                             var type = getdataNmber()
                             console.log(type)
@@ -340,7 +340,10 @@
             total: 'total',
             model: {
                 id: "shipLineId",
-                fields: {}
+                fields: {
+                    description: {type: "string",editable:false},
+                    lotControl: {type: "string",editable:false},
+                }
             }
         }
     });
